@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../dist/style.css">
+  <title>Campaign Arrange System</title>
+</head>
+<body>
+  <div class="main-app">
+    <header>
+      <nav>
+        <div class="nav-logo"><img src="./images/logo.svg" alt=""></div>
+        <ul class="nav-selectors">
+          <li class="select-item active"><img src="./images/frame.svg" alt=""></li>
+          <li class="select-item"><img src="./images/folder.svg" alt=""></li>
+          <li class="select-item"><img src="./images/mail.svg" alt=""></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="main-container">
+        <h2 class="main-title">Campaign</h2>
+        <div class="main-content">
+          <ul class="main-content-schema">
+            <li class="schema-item" id="schema-checkbox"><input type="checkbox"></li>
+            <li class="schema-item" id="schema-id">ID</li>
+            <li class="schema-item" id="schema-name">Name</li>
+            <li class="schema-item" id="schema-advertiser">Advertiser<p>Group</p>
+            </li>
+            <li class="schema-item" id="schema-descripition">Descripition</li>
+            <li class="schema-item" id="schema-price">Price<img src="./images/sort.svg" alt=""></li>
+            <li class="schema-item" id="schema-start">Start Time<img src="./images/sort.svg" alt=""></li>
+            <li class="schema-item" id="schema-end">End Time<img src="./images/sort.svg" alt=""></li>
+            <li class="schema-item" id="schema-actions">Actions</li>
+          </ul>
+          <div class="main-content-datas">
+            <ul class="datas"></ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  
+</body>
+</html>
