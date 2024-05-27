@@ -103,6 +103,7 @@ html,body {
         font-size: 3rem;
       }
       .main-content {
+        width: 100%;
         margin-top: 30px;
         position: relative;
         .main-content-schema {
@@ -147,10 +148,12 @@ html,body {
         }
         .main-content-datas {
           width: 100%;
+          max-height: 750px;
           position: absolute;
           top: 50px;
           left: 0;
           right: 0;
+          overflow-y: scroll;
           .datas {
             display: grid;
             grid-template-columns: 5% 10% 11% 11% 15% 11% 11% 11% 15%;
@@ -158,7 +161,6 @@ html,body {
             justify-items: center;
             align-items: center;
             font-size: 14px;
-            background-color: #fff;
             .data-item {
               width: 100%;
               height: 100%;
