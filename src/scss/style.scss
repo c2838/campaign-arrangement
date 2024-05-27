@@ -203,6 +203,7 @@ html,body {
               top: 50%;
               right: 0;
               transform: translateY(-50%);
+              cursor: pointer;
             }
           }
         }
@@ -216,6 +217,12 @@ html,body {
           overflow-y: scroll;
           .datas {
             @extend %contentGrid;
+            &.bgWhite {
+              background-color: #fff;
+            }
+            &.bgGray {
+              background-color: #E9E9E9;
+            }
             .data-item {
               width: 100%;
               height: 100%;
