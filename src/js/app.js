@@ -11,14 +11,17 @@ const tableDatas = {
   actions: "./images/menu.svg"
 }
 
-
+const selectors = document.querySelector('.nav-selectors')
 
 function dataGenerator() {
   const contentDatas = document.querySelector('.main-content-datas')
   for(let i = 1; i <= 20; i++) {
     contentDatas.innerHTML += `
       <ul class="datas" data-id=${i}>
-        <li class="data-item" id="data-checkbox"><input type="checkbox"></li>
+        <li class="data-item" id="data-checkbox">
+          <input type="checkbox">
+          <img src="./images/checkbox.svg"" alt=""
+        </li>
         <li class="data-item" id="data-id">${tableDatas.id}</li>
         <li class="data-item" id="data-name">${tableDatas.name}</li>
         <li class="data-item" id="data-advertiser">${tableDatas.advertiser}<p>${tableDatas.advertiser_group}</p>
@@ -45,16 +48,18 @@ function changeBgColor() {
 
 function selectItemActive(event) {
   const target = event.target
+  console.log(target)
   const selectItem = document.querySelectorAll('.select-item')
   const node = target.closest('.select-item')
-  selectItem.forEach(element => {
-    element.classList.remove('active')
-  })
-  node.classList.add('active')
+  // 避免點到外層的時候反白被取消
+  if (node) {
+    selectItem.forEach(element => {
+      element.classList.remove('active')
+    })
+    node.classList.add('active')
+  }
 }
 
 dataGenerator()
 changeBgColor()
-
-const selectors = document.querySelector('.nav-selectors')
 selectors.addEventListener('click', selectItemActive)
