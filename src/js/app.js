@@ -36,12 +36,25 @@ function changeBgColor() {
   const dataUl = document.querySelectorAll('.datas')
   dataUl.forEach((data, key) => {
     if (key % 2 === 0) {
-      data.style = "background-color: #fff"
+      data.style = "background-color: #fff;"
     } else {
-      data.style = "background-color: #E9E9E9"
+      data.style = "background-color: #E9E9E9;"
     }
   })
 }
 
+function selectItemActive(event) {
+  const target = event.target
+  const selectItem = document.querySelectorAll('.select-item')
+  const node = target.closest('.select-item')
+  selectItem.forEach(element => {
+    element.classList.remove('active')
+  })
+  node.classList.add('active')
+}
+
 dataGenerator()
 changeBgColor()
+
+const selectors = document.querySelector('.nav-selectors')
+selectors.addEventListener('click', selectItemActive)
