@@ -60,32 +60,34 @@ td {
   font-size: 14px;
 }
 
-%checkbox-img {
-  img {
+%sort_img {
     width: 20px;
     height: 20px;
     display: block;
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    right: 0%;
+    transform: translateY(-50%);
     z-index: 1;
     cursor: pointer;
-  }
 }
 
-%checked {
-  &:checked {
-    &::after {
-      content: "\2714";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      font-size: 14px;
-    }
-  }
+%middle {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+%check_icon {
+  content: "\2714";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 14px;
 }
 
 /* style */
@@ -181,12 +183,96 @@ html,body {
             input {
               -webkit-appearance: none;
               &[type="checkbox"] {
-                @extend %checked; 
+                &:checked {
+                  & ~ label {
+                    display: block;
+                    cursor: pointer;
+                  }
+                } 
               }
             }
-            @extend %checkbox-img;
+            label {
+              display: none;
+              &::after {
+                @extend %check_icon
+              }
+            }
+            img{
+              @extend %middle;
+              cursor: pointer;
+            }
           }
+          #schema-start,
+          #schema-end,
+          #schema-price {
+            img {
+              @extend %sort_img;
+            }
+          }
+
           #schema-advertiser {
+            height: 80%;
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: repeat(2, 1fr);
+
+            p {
+              color: #828282;
+            }
+          }
+        }    
+      }
+      .main-content-datas {
+        width: 100%;
+        max-height: 750px;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        overflow-y: scroll;
+        .datas {
+          @extend %contentGrid;
+          &.bgWhite {
+            background-color: #fff;
+          }
+          &.bgGray {
+            background-color: #E9E9E9;
+          }
+          .data-item {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            position: relative;
+            img {
+              display: block;
+            }
+          }
+          #data-checkbox {
+            input {
+              -webkit-appearance: none;
+              &[type="checkbox"] {
+                &:checked {
+                  &~label {
+                    display: block;
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+            img{
+              @extend %middle;
+              cursor: pointer;
+            }
+            label {
+              display: none;
+              &::after {
+                @extend %check_icon
+              }
+            }
+          }
+          #data-advertiser {
             height: 80%;
             display: grid;
             grid-template-columns: auto;
@@ -195,66 +281,8 @@ html,body {
               color: #828282;
             }
           }
-          #schema-price,
-          #schema-start,
-          #schema-end {
-            img {
-              position: absolute;
-              top: 50%;
-              right: 0;
-              transform: translateY(-50%);
-              cursor: pointer;
-            }
-          }
-        }
-        .main-content-datas {
-          width: 100%;
-          max-height: 750px;
-          position: absolute;
-          top: 50px;
-          left: 0;
-          right: 0;
-          overflow-y: scroll;
-          .datas {
-            @extend %contentGrid;
-            &.bgWhite {
-              background-color: #fff;
-            }
-            &.bgGray {
-              background-color: #E9E9E9;
-            }
-            .data-item {
-              width: 100%;
-              height: 100%;
-              display: grid;
-              justify-items: center;
-              align-items: center;
-              position: relative;
-              img {
-                display: block;
-              }
-            }
-            #data-checkbox {
-              input {
-                -webkit-appearance: none;
-                &[type="checkbox"] {
-                  @extend %checked;
-                }
-              }
-              @extend %checkbox-img;
-            }
-            #data-advertiser {
-              height: 80%;
-              display: grid;
-              grid-template-columns: auto;
-              grid-template-rows: repeat(2, 1fr);
-              p {
-                color: #828282;
-              }
-            }
-            #data-actions {
-              cursor: pointer;
-            }
+          #data-actions {
+            cursor: pointer;
           }
         }
       }

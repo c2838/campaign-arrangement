@@ -20,10 +20,11 @@ const mainSchema = document.querySelector('.main-content-schema')
 function dataGenerator() {
   for(let i = 0; i < 20; i++) {
     mainDatas.innerHTML += `
-      <ul class="datas ${i % 2 === 0 ? 'bgWhite' : 'bgGray' }" data-id=${i}>
+      <ul class="datas ${i % 2 === 0 ? 'bgWhite' : 'bgGray' }">
         <li class="data-item" id="data-checkbox">
           <input type="checkbox" id="data-checker">
-          <img src="./images/checkbox.svg"" alt="">
+          <label for="data-checker"></label>
+          <img src="${tupleDatas.checkbox}"" alt="">
         </li>
         <li class="data-item" id="data-id">${tupleDatas.id}</li>
         <li class="data-item" id="data-name">${tupleDatas.name}</li>
@@ -33,7 +34,9 @@ function dataGenerator() {
         <li class="data-item" id="data-price">${tupleDatas.price}</li>
         <li class="data-item" id="data-start">${tupleDatas.start}</li>
         <li class="data-item" id="data-end">${tupleDatas.end}</li>
-        <li class="data-item" id="data-actions"><img src="${tupleDatas.actions}" alt=""></li>
+        <li class="data-item" id="data-actions">
+          <img src="${tupleDatas.actions}" alt="">
+        </li>
       </ul>`
   }
 }
@@ -57,7 +60,7 @@ function selectItemActive(event) {
   }
 }
 
-// 資料選擇後背景反橘
+// 資料打勾後單一值組背景反橘
 function dataSelected(event) {
   const target = event.target
   const node = target.closest('#data-checkbox')
@@ -86,6 +89,7 @@ function dataSelected(event) {
   }
 }
 
+// 全選打勾後所有值組背景反橘
 function allSelected(event) {
   const target = event.target
   const node = target.closest('#schema-checkbox')
@@ -109,6 +113,7 @@ function allSelected(event) {
         data_checker.checked = !data_checker.checked
       })
     } else {
+        // 值組回歸原背景色
         datas.forEach(item => {
         if (item.classList.contains('bgWhite')) {
           item.style = "background-color: #fff;"
@@ -116,6 +121,7 @@ function allSelected(event) {
           item.style = "background-color: #E9E9E9;"
         }
         const data_checker = item.querySelector('#data-checker')
+        // 將值組勾勾移除
         if (data_checker.checked) {
           data_checker.checked = !data_checker.checked
         }
