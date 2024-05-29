@@ -29,8 +29,8 @@ function dataGenerator() {
       <ul class="datas ${i % 2 === 0 ? 'bgWhite' : 'bgGray' }">
         <li class="data-item" id="data-checkbox">
           <input type="checkbox" id="data-checker">
-          <label for="data-checker"></label>
-          <img src="${tupleDatas.checkbox}"" alt="">
+          <div id="data-label"></div>
+          <img src="${tupleDatas.checkbox}"" alt="" id="checkbox-img">
         </li>
         <li class="data-item" id="data-id">${tupleDatas.id}</li>
         <li class="data-item" id="data-name">${tupleDatas.name}</li>
@@ -41,7 +41,7 @@ function dataGenerator() {
         <li class="data-item" id="data-start">${tupleDatas.start}</li>
         <li class="data-item" id="data-end">${tupleDatas.end}</li>
         <li class="data-item" id="data-actions">
-          <img src="${tupleDatas.actions}" alt="">
+          <img src="${tupleDatas.actions}" alt="" id="menu-icon">
           <div class="actions_menu hidden" id="actions_menu" role="dialog" aria-modal="true" aria-labelledby="data-actions" data-index=${i}>
             <ul class="menu">
               <li class="duplicate">
@@ -86,9 +86,14 @@ function selectItemActive(event) {
 function dataSelected(event) {
   const target = event.target
   const node = target.closest('#data-checkbox')
-  if (node) {
+  console.log(target.id)
+  console.log(node)
+  if (node && (target.id === 'checkbox-img' || target.id === 'data-label')) {
     const checkbox = node.querySelector('#data-checker')
     const dataItem = node.parentElement
+    console.log(checkbox)
+    console.log(dataItem)
+    console.log(checkbox.checked)
     // 使checkbox被標記為checked
     if (checkbox) {
       checkbox.checked = !checkbox.checked
@@ -104,6 +109,7 @@ function dataSelected(event) {
         dataItem.style = "background-color: #E9E9E9;"
       }
     }
+    console.log(checkbox.checked)
   }
 }
 
@@ -112,7 +118,7 @@ function allSelected(event) {
   const target = event.target
   const node = target.closest('#schema-checkbox')
   const datas = document.querySelectorAll('.datas')
-  if (node) {
+  if (node && (target.id === 'scCheckbox-img' || target.id === 'schema-label')) {
     const checkbox = node.querySelector('#schema-checker')
     if (checkbox) {
       // 全選前先清除所有狀態
@@ -148,19 +154,20 @@ function allSelected(event) {
   }
 }
 
-function poponSwitch(event) {
+function popupSwitch(event) {
   const target = event.target
-  const Menus = document.querySelectorAll('.actions_menu')
   const node = target.closest('#data-actions')
+  const Menus = document.querySelectorAll('.actions_menu')
   const menuSwitch = node.querySelector('.actions_menu')
   const index = Number(menuSwitch.dataset.index)
-
-  if (target.tagName === 'IMG') {
+  // 修改顯示狀態
+  if (target.id === 'menu-icon') {
     menuSwitch.classList.toggle('hidden')
   }
+  // 清除除了點擊按鈕以外的編輯選單
   for (let i = 0; i < dataAmounts; i++) {
     if (i === index) continue
-    if (!Menus[i].classList.contains('hidden') || target.tagName !== 'IMG') {
+    if (!Menus[i].classList.contains('hidden') ) {
       Menus[i].classList.add('hidden')
     }
   }
@@ -169,5 +176,5 @@ function poponSwitch(event) {
 dataGenerator()
 selectors.addEventListener('click', selectItemActive)
 mainDatas.addEventListener('click', dataSelected)
-mainDatas.addEventListener('click', poponSwitch)
+mainDatas.addEventListener('click', popupSwitch)
 mainSchema.addEventListener('click', allSelected)

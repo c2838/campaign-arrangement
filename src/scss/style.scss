@@ -184,14 +184,14 @@ html,body {
               -webkit-appearance: none;
               &[type="checkbox"] {
                 &:checked {
-                  & ~ label {
+                  & ~ div {
                     display: block;
                     cursor: pointer;
                   }
                 } 
               }
             }
-            label {
+            div {
               display: none;
               &::after {
                 @extend %check_icon
@@ -254,7 +254,7 @@ html,body {
               -webkit-appearance: none;
               &[type="checkbox"] {
                 &:checked {
-                  &~label {
+                  &~div {
                     display: block;
                     cursor: pointer;
                   }
@@ -265,7 +265,7 @@ html,body {
               @extend %middle;
               cursor: pointer;
             }
-            label {
+            div {
               display: none;
               &::after {
                 @extend %check_icon
@@ -288,14 +288,21 @@ html,body {
             .actions_menu {
               height: 120px;
               width: 120px;
-              display: block;
               position: absolute;
               top: 100%;
               right: 50%;
               z-index: 1;
               border: 1px solid #e5e5e5;
+              transform: scale(1, 1);
+              transform-origin: top;
+              transition: transform 0.2s ease-out;
               &.hidden {
-                display: none;
+                transform: scale(1, 0);
+                .menu {
+                  li {
+                    opacity: 0;
+                  }
+                }
               }
               .menu {
                 height: 100%;
@@ -310,6 +317,8 @@ html,body {
                   align-items: center;
                   justify-content: flex-start;
                   cursor: pointer;
+                  opacity: 1;
+                  transition: opacity 0.1s ease-in-out 0.1s;
                   img {
                     height: 25px;
                     width: 25px;
