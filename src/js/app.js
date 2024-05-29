@@ -11,14 +11,20 @@ const tupleDatas = {
   actions: "./images/menu.svg"
 }
 
+const poponDatas = {
+  duplicate: './images/duplicate.svg',
+  edit: './images/edit.svg',
+  delete: './images/delete.svg'
+}
+
 const selectors = document.querySelector('.nav-selectors')
 const mainDatas = document.querySelector('.main-content-datas')
 const mainSchema = document.querySelector('.main-content-schema')
-
+const dataAmounts = 20
 
 // 產生資料
 function dataGenerator() {
-  for(let i = 0; i < 20; i++) {
+  for(let i = 0; i < dataAmounts; i++) {
     mainDatas.innerHTML += `
       <ul class="datas ${i % 2 === 0 ? 'bgWhite' : 'bgGray' }">
         <li class="data-item" id="data-checkbox">
@@ -36,6 +42,22 @@ function dataGenerator() {
         <li class="data-item" id="data-end">${tupleDatas.end}</li>
         <li class="data-item" id="data-actions">
           <img src="${tupleDatas.actions}" alt="">
+          <div class="actions_menu hidden" id="actions_menu" role="dialog" aria-modal="true" aria-labelledby="data-actions" data-index=${i}>
+            <ul class="menu">
+              <li class="duplicate">
+                <img src="${poponDatas.duplicate}" alt="">
+                <span>Duplicate</span>
+              </li>
+              <li class="edit">
+                <img src="${poponDatas.edit}" alt="">
+                <span>Edit</span>
+              </li>
+              <li class="delete">
+                <img src="${poponDatas.delete}" alt="">
+                <span>Delete</span>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>`
   }
@@ -64,16 +86,12 @@ function selectItemActive(event) {
 function dataSelected(event) {
   const target = event.target
   const node = target.closest('#data-checkbox')
-  console.log(node)
   if (node) {
     const checkbox = node.querySelector('#data-checker')
     const dataItem = node.parentElement
-    console.log(checkbox.checked)
     // 使checkbox被標記為checked
     if (checkbox) {
-      console.log('Before toggle:', checkbox.checked)
       checkbox.checked = !checkbox.checked
-      console.log('After toggle:', checkbox.checked)
     }
     // 若為checked則背景反橘
     if (checkbox.checked) {
@@ -130,7 +148,26 @@ function allSelected(event) {
   }
 }
 
+function poponSwitch(event) {
+  const target = event.target
+  const Menus = document.querySelectorAll('.actions_menu')
+  const node = target.closest('#data-actions')
+  const menuSwitch = node.querySelector('.actions_menu')
+  const index = Number(menuSwitch.dataset.index)
+
+  if (target.tagName === 'IMG') {
+    menuSwitch.classList.toggle('hidden')
+  }
+  for (let i = 0; i < dataAmounts; i++) {
+    if (i === index) continue
+    if (!Menus[i].classList.contains('hidden') || target.tagName !== 'IMG') {
+      Menus[i].classList.add('hidden')
+    }
+  }
+}
+
 dataGenerator()
 selectors.addEventListener('click', selectItemActive)
 mainDatas.addEventListener('click', dataSelected)
+mainDatas.addEventListener('click', poponSwitch)
 mainSchema.addEventListener('click', allSelected)
