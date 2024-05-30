@@ -83,6 +83,25 @@ function selectItemActive(event) {
   }
 }
 
+// 原始資料背景顏色(未反橘)
+function originalDataBG (ele) {
+  // 黑暗模式
+  if (document.documentElement.getAttribute('dark-theme') === 'dark') {
+    if (ele.classList.contains('bgWhite')) {
+        ele.style = "background-color: #3A3A3A;"
+      } else if (ele.classList.contains('bgGray')) {
+        ele.style = "background-color: #575757;"
+      }
+  } else {
+    // 淺色模式
+    if (ele.classList.contains('bgWhite')) {
+      ele.style = "background-color: #fff;"
+    } else if (ele.classList.contains('bgGray')) {
+      ele.style = "background-color: #E9E9E9;"
+    }
+  }
+}
+
 // 資料打勾後單一值組背景反橘
 function dataSelected(event) {
   const target = event.target
@@ -100,20 +119,7 @@ function dataSelected(event) {
       dataItem.style = "background-color: orange; border-bottom: 1px solid #fff"
     } else {
       // 使背景回歸本色
-      if (document.documentElement.getAttribute('dark-theme') === 'dark') {
-        if (dataItem.classList.contains('bgWhite')) {
-            dataItem.style = "background-color: #3A3A3A;"
-          } else if (dataItem.classList.contains('bgGray')) {
-            dataItem.style = "background-color: #575757;"
-          }
-      } else {
-        if (dataItem.classList.contains('bgWhite')) {
-          dataItem.style = "background-color: #fff;"
-        } else if (dataItem.classList.contains('bgGray')) {
-          dataItem.style = "background-color: #E9E9E9;"
-        }
-      }
-      
+      originalDataBG(dataItem)
     }
   }
 }
@@ -137,30 +143,18 @@ function allSelected(event) {
     }
     if (checkbox.checked) {
       datas.forEach(item => {
+        // 反橘
         item.style = "background-color: orange; border-bottom: 1px solid #fff"
         // 將所有值組checkbox打勾
         const data_checker = item.querySelector('#data-checker')
         data_checker.checked = !data_checker.checked
       })
     } else {
-        // 值組回歸原背景色
         datas.forEach(item => {
-          if (document.documentElement.getAttribute('dark-theme') === 'dark') {
-            if (item.classList.contains('bgWhite')) {
-              item.style = "background-color: #3A3A3A;"
-              } else if (item.classList.contains('bgGray')) {
-                item.style = "background-color: #575757;"
-              }
-          } else {
-              if (item.classList.contains('bgWhite')) {
-                item.style = "background-color: #fff;"
-                } else if (item.classList.contains('bgGray')) {
-                  item.style = "background-color: #E9E9E9;"
-                }
-          }
-          
-          const data_checker = item.querySelector('#data-checker')
+          // 值組回歸原背景色
+          originalDataBG(item)
           // 將值組勾勾移除
+          const data_checker = item.querySelector('#data-checker') 
           if (data_checker.checked) {
             data_checker.checked = !data_checker.checked
           }
@@ -173,9 +167,9 @@ function allSelected(event) {
 function popupSwitch(event) {
   const target = event.target
   const node = target.closest('#data-actions')
-  const Menus = document.querySelectorAll('.actions_menu')
   const menuSwitch = node.querySelector('.actions_menu')
   const index = Number(menuSwitch.dataset.index)
+  const Menus = document.querySelectorAll('.actions_menu')
   // 修改顯示狀態
   if (target.id === 'menu-icon') {
     menuSwitch.classList.toggle('hidden')
