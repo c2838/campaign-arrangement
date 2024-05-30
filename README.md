@@ -37,8 +37,7 @@ npm install //安裝npm套件
 ```
 VS Code live
 ```
-5. 至瀏覽器網址列輸入 http://localhost:5500/src/index.html，即可瀏覽廣告排期系統並進行操作~
-```
+4. 至瀏覽器網址列輸入 http://localhost:5500/src/index.html，即可瀏覽廣告排期系統並進行操作~
 
 
 ## 專案畫面
