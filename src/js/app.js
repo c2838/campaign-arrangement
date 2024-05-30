@@ -20,6 +20,7 @@ const poponDatas = {
 const selectors = document.querySelector('.nav-selectors')
 const mainDatas = document.querySelector('.main-content-datas')
 const mainSchema = document.querySelector('.main-content-schema')
+const darkSwitch = document.querySelector('#dark-switch')
 const dataAmounts = 20
 
 // 產生資料
@@ -86,14 +87,10 @@ function selectItemActive(event) {
 function dataSelected(event) {
   const target = event.target
   const node = target.closest('#data-checkbox')
-  console.log(target.id)
-  console.log(node)
+  // 避免按到checkbox以外的位置也觸發函式
   if (node && (target.id === 'checkbox-img' || target.id === 'data-label')) {
     const checkbox = node.querySelector('#data-checker')
     const dataItem = node.parentElement
-    console.log(checkbox)
-    console.log(dataItem)
-    console.log(checkbox.checked)
     // 使checkbox被標記為checked
     if (checkbox) {
       checkbox.checked = !checkbox.checked
@@ -103,13 +100,21 @@ function dataSelected(event) {
       dataItem.style = "background-color: orange; border-bottom: 1px solid #fff"
     } else {
       // 使背景回歸本色
-      if (dataItem.classList.contains('bgWhite')) {
-        dataItem.style = "background-color: #fff;"
-      } else if (dataItem.classList.contains('bgGray')) {
-        dataItem.style = "background-color: #E9E9E9;"
+      if (document.documentElement.getAttribute('dark-theme') === 'dark') {
+        if (dataItem.classList.contains('bgWhite')) {
+            dataItem.style = "background-color: #3A3A3A;"
+          } else if (dataItem.classList.contains('bgGray')) {
+            dataItem.style = "background-color: #575757;"
+          }
+      } else {
+        if (dataItem.classList.contains('bgWhite')) {
+          dataItem.style = "background-color: #fff;"
+        } else if (dataItem.classList.contains('bgGray')) {
+          dataItem.style = "background-color: #E9E9E9;"
+        }
       }
+      
     }
-    console.log(checkbox.checked)
   }
 }
 
@@ -118,6 +123,7 @@ function allSelected(event) {
   const target = event.target
   const node = target.closest('#schema-checkbox')
   const datas = document.querySelectorAll('.datas')
+  // 避免按到checkbox以外的位置也觸發函式
   if (node && (target.id === 'scCheckbox-img' || target.id === 'schema-label')) {
     const checkbox = node.querySelector('#schema-checker')
     if (checkbox) {
@@ -139,21 +145,31 @@ function allSelected(event) {
     } else {
         // 值組回歸原背景色
         datas.forEach(item => {
-        if (item.classList.contains('bgWhite')) {
-          item.style = "background-color: #fff;"
-        } else if (item.classList.contains('bgGray')) {
-          item.style = "background-color: #E9E9E9;"
-        }
-        const data_checker = item.querySelector('#data-checker')
-        // 將值組勾勾移除
-        if (data_checker.checked) {
-          data_checker.checked = !data_checker.checked
-        }
+          if (document.documentElement.getAttribute('dark-theme') === 'dark') {
+            if (item.classList.contains('bgWhite')) {
+              item.style = "background-color: #3A3A3A;"
+              } else if (item.classList.contains('bgGray')) {
+                item.style = "background-color: #575757;"
+              }
+          } else {
+              if (item.classList.contains('bgWhite')) {
+                item.style = "background-color: #fff;"
+                } else if (item.classList.contains('bgGray')) {
+                  item.style = "background-color: #E9E9E9;"
+                }
+          }
+          
+          const data_checker = item.querySelector('#data-checker')
+          // 將值組勾勾移除
+          if (data_checker.checked) {
+            data_checker.checked = !data_checker.checked
+          }
       })
     }
   }
 }
 
+// popup顯示設定用
 function popupSwitch(event) {
   const target = event.target
   const node = target.closest('#data-actions')
@@ -173,8 +189,49 @@ function popupSwitch(event) {
   }
 }
 
+// 黑暗模式
+function darkMode (event) {
+  const target = event.target
+  const datas = document.querySelectorAll('.datas')
+  const schemaCheckbox = document.querySelector('#schema-checker')
+  if (target.checked) {
+    // 設定黑暗模式
+    document.documentElement.setAttribute('dark-theme', 'dark')
+    // 重設schema全選狀態
+    schemaCheckbox.checked = false
+    datas.forEach(item => {
+      // 重設data-item全選狀態
+      const checkbox = item.querySelector('#data-checker')
+      checkbox.checked = false
+      // 設定data背景顏色
+      if (item.classList.contains('bgWhite')) {
+        item.style = "background-color: #3A3A3A;"
+        } else if (item.classList.contains('bgGray')) {
+          item.style = "background-color: #575757;"
+        }
+    })
+  } else {
+    // 設定回淺色模式
+    document.documentElement.setAttribute('dark-theme', 'light')
+    // 重設schema全選狀態
+    schemaCheckbox.checked = false
+    datas.forEach(item => {
+      // 重設data-item全選狀態
+      const checkbox = item.querySelector('#data-checker')
+      checkbox.checked = false
+      // 設定data背景顏色
+      if (item.classList.contains('bgWhite')) {
+        item.style = "background-color: #fff;"
+        } else if (item.classList.contains('bgGray')) {
+          item.style = "background-color: #E9E9E9;"
+        }
+    })
+  }
+}
+
 dataGenerator()
 selectors.addEventListener('click', selectItemActive)
 mainDatas.addEventListener('click', dataSelected)
 mainDatas.addEventListener('click', popupSwitch)
 mainSchema.addEventListener('click', allSelected)
+darkSwitch.addEventListener('change', darkMode)
