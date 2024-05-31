@@ -20,7 +20,6 @@ Ver 1.0.0 (now)
 * Visual Studio Code - 開發工具
 * Git Bash - 指令終端
 * webpack (v5.91.0) - 打包工具(插件可參考 pakeage)
-* Express handlebars (v7.1.2) - 樣板引擎
 
 
 ## 安裝與執行步驟
