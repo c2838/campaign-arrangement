@@ -34,6 +34,7 @@ npm install //安裝npm套件
 ```
 3. 啟動程式
 ```
+npm run build //將SCSS編譯為CSS
 VS Code: Go live
 ```
 4. 至瀏覽器網址列輸入 http://localhost:5500/src/index.html，即可瀏覽廣告排期系統並進行操作~
