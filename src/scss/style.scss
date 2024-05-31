@@ -220,13 +220,14 @@ html,body {
           position: absolute;
           top: 0;
           right: 0;
-          left: 0;  
+          left: 0;
           @extend %contentGrid;
           background-color: var(--main-schema);
           .schema-item {
             width: 100%;
             height: 100%;
             display: grid;
+            grid-template-rows: 1fr;
             justify-items: center;
             align-items: center;
             position: relative;
