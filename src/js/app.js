@@ -35,9 +35,9 @@ function dataGenerator() {
         </li>
         <li class="data-item" id="data-id">${tupleDatas.id}</li>
         <li class="data-item" id="data-name">${tupleDatas.name}</li>
-        <li class="data-item" id="data-advertiser"><span>${tupleDatas.advertiser}</span><p>${
-      tupleDatas.advertiser_group
-    }</p>
+        <li class="data-item" id="data-advertiser"><span>${
+          tupleDatas.advertiser
+        }</span><p>${tupleDatas.advertiser_group}</p>
         </li>
         <li class="data-item" id="data-descripition">${
           tupleDatas.description
