@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../dist/style.css">
+    <title>Campaign Arrange System</title>
+  </head>
+  <body>
+    <div class="main-app">
+      <header>
+        <nav>
+          <div class="nav-logo"><a href="#"></a></div>
+          <ul class="nav-selectors">
+            <li class="select-item active">
+              <img src="./images/frame.svg" alt="" />
+            </li>
+            <li class="select-item">
+              <img src="./images/folder.svg" alt="" />
+            </li>
+            <li class="select-item"><img src="./images/mail.svg" alt="" /></li>
+          </ul>
+          <div class="nav-dark">
+            <label for="dark-switch" class="dark-label"></label>
+            <input type="checkbox" class="dark-switch" id="dark-switch" />
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="main-container">
+          <h2 class="main-title">Campaign</h2>
+          <div class="main-content">
+            <ul class="main-content-schema">
+              <li class="schema-item" id="schema-checkbox">
+                <input type="checkbox" id="schema-checker" />
+                <div id="schema-label"></div>
+                <img src="./images/checkbox.svg" alt="" id="scCheckbox-img">
+              </li>
+              <li class="schema-item" id="schema-id">ID</li>
+              <li class="schema-item" id="schema-name">Name</li>
+              <li class="schema-item" id="schema-advertiser">
+                <span>Advertiser</span>
+                <p>Group</p>
+              </li>
+              <li class="schema-item" id="schema-descripition">Descripition</li>
+              <li class="schema-item" id="schema-price">
+                <span>Price</span><img src="./images/sort.svg" alt="" />
+              </li>
+              <li class="schema-item" id="schema-start">
+                <span>Start Time</span><img src="./images/sort.svg" alt="" />
+              </li>
+              <li class="schema-item" id="schema-end">
+                <span>End Time</span><img src="./images/sort.svg" alt="" />
+              </li>
+              <li class="schema-item" id="schema-actions">Actions</li>
+            </ul>
+            <div class="main-content-datas"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
